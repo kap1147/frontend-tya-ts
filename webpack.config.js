@@ -1,11 +1,18 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: '/src/index.tsx',
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+            loader: 'babel-loader'
+        }
+      },
+      {
+        test: /\.(ts|tsx)$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
@@ -16,6 +23,11 @@ module.exports = {
           'css-loader'
         ]
       },
+      {
+        test: /\.html$/,
+        loader: "html-loader"
+        // alternative: raw
+     }
     ],
   },
   devServer: {
